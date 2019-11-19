@@ -14,6 +14,10 @@ app.use(express.json())
 app.use(cookieParser())
 
 
+app.get('/', (req, res) => {
+    res.json({ "Hello": "I am happy to deploy our application" })
+})
+
 //=================================
 //            User
 //=================================
@@ -46,8 +50,6 @@ app.post('/api/user/login', (req, res) => {
     User.findOne({ email }, (err, user) => {
         if (!user)
             return res.json({ loginSuccess: false, message: "Auth failed, email not found" })
-
-        // console.log('user = ', user)
 
         //comparePassword
         user.comparePassword(password, (err, isMatch) => {
